@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ListJobs from './components/ListJobs';
+import DetailJobs from './components/DetailJobs';
+import Login from './pages/Login';
+import AuthChecker from './components/AuthChecker';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <AuthChecker>
+              {' '}
+              <ListJobs />
+            </AuthChecker>
+          }
+        />
+        <Route
+          path="/jobs/:id"
+          element={
+            <AuthChecker>
+              {' '}
+              <DetailJobs />
+            </AuthChecker>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
